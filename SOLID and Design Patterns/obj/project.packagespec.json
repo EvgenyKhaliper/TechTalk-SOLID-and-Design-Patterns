@@ -1,0 +1,38 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/vaska/RiderProjects/SOLID and Design Patterns/SOLID and Design Patterns/SOLID and Design Patterns.csproj",
+    "projectName": "SOLID and Design Patterns",
+    "projectPath": "/home/vaska/RiderProjects/SOLID and Design Patterns/SOLID and Design Patterns/SOLID and Design Patterns.csproj",
+    "outputPath": "/home/vaska/RiderProjects/SOLID and Design Patterns/SOLID and Design Patterns/obj/",
+    "projectStyle": "PackageReference",
+    "originalTargetFrameworks": [
+      "netstandard2.0"
+    ],
+    "frameworks": {
+      "netstandard2.0": {
+        "projectReferences": {}
+      }
+    }
+  },
+  "frameworks": {
+    "netstandard2.0": {
+      "dependencies": {
+        "NETStandard.Library": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "2.0.0"
+        },
+        "Microsoft.Extensions.Caching.Memory": {
+          "target": "Package",
+          "version": "2.0.0"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}
