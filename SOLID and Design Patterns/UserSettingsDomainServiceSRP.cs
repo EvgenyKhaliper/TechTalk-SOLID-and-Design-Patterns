@@ -8,14 +8,8 @@ namespace SOLID_and_Design_Patterns
     // Single responsibility principle
     // a class should have only a single responsibility 
     // (i.e. changes to only one part of the software's specification should be able to affect the specification of the class).
-   
-    public interface IUserSettingsDomainServiceSRP
-    {
-        UserSettings SaveUserSettings(UserSettings userSettings);
-        UserSettings GetUserSettings(Guid userId);
-    }
     
-    public class UserSettingsDomainServiceSRP : IUserSettingsDomainServiceSRP
+    public class UserSettingsDomainServiceSRP : IUserSettingsDomainService
     {
         private ICache<UserSettings> _cache;
         private IStore<UserSettings> _store;
@@ -26,7 +20,7 @@ namespace SOLID_and_Design_Patterns
             _store = new UserSettingsStore();
         }   
 
-        public UserSettings SaveUserSettings(UserSettings userSettings)
+        public void SaveUserSettings(UserSettings userSettings)
         {
             var userId = userSettings.UserId;
             var selectedUserSettings = _store.Get(userId);
@@ -49,10 +43,6 @@ namespace SOLID_and_Design_Patterns
                     SendNewsletter = true
                 }); 
             }
-
-            var freshUserSettings = _store.Get(userId);
-            _cache.Set(freshUserSettings);
-            return freshUserSettings;
         }
 
         public UserSettings GetUserSettings(Guid userId)

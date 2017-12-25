@@ -6,7 +6,7 @@ namespace SOLID_and_Design_Patterns
 {    
     public interface IUserSettingsDomainService
     {
-        UserSettings SaveUserSettings(UserSettings userSettings);
+        void SaveUserSettings(UserSettings userSettings);
         UserSettings GetUserSettings(Guid userId);
     }
     
@@ -25,7 +25,7 @@ namespace SOLID_and_Design_Patterns
             _connectionString = "localhost:666;admin;admin;sa_role=true;";
         }   
 
-        public UserSettings SaveUserSettings(UserSettings userSettings)
+        public void SaveUserSettings(UserSettings userSettings)
         {
             // Last minute feature/hack.
             // Sounds familiar ?
@@ -53,13 +53,6 @@ namespace SOLID_and_Design_Patterns
                     userSettings.SendNewsletter);
                 DatabaseQueryExecutor.Insert<UserSettings>(_connectionString, insertCommand);
             }
-
-            var freshUserSettings = DatabaseQueryExecutor.Query<UserSettings>(_connectionString, selectQuery);
-            _cache.Set($"{userId}:settings", 
-                freshUserSettings, 
-                new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromHours(1)));
-            return freshUserSettings;
         }
 
         public UserSettings GetUserSettings(Guid userId)

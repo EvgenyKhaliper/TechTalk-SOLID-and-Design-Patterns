@@ -6,13 +6,7 @@ namespace SOLID_and_Design_Patterns
     // Open/closed principle
     // “software entities … should be open for extension, but closed for modification.”
     
-    public interface IUserSettingsDomainServiceOCP
-    {
-        UserSettings SaveUserSettings(UserSettings userSettings);
-        UserSettings GetUserSettings(Guid userId);
-    }
-    
-    public class UserSettingsDomainServiceOCP : IUserSettingsDomainServiceOCP
+    public class UserSettingsDomainServiceOCP : IUserSettingsDomainService
     {
         private ICache<UserSettings> _cache;
         private IStore<UserSettings> _store;
@@ -23,7 +17,7 @@ namespace SOLID_and_Design_Patterns
             _store = new AliasCorrectingUserSettingsStore();
         }   
 
-        public UserSettings SaveUserSettings(UserSettings userSettings)
+        public void SaveUserSettings(UserSettings userSettings)
         {
             var userId = userSettings.UserId;
             var selectedUserSettings = _store.Get(userId);
@@ -46,10 +40,6 @@ namespace SOLID_and_Design_Patterns
                     SendNewsletter = true
                 }); 
             }
-
-            var freshUserSettings = _store.Get(userId);
-            _cache.Set(freshUserSettings);
-            return freshUserSettings;
         }
 
         public UserSettings GetUserSettings(Guid userId)
