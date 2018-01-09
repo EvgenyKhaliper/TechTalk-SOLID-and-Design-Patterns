@@ -6,7 +6,7 @@ namespace SOLID_and_Design_Patterns
     {
         public static string CreateSelectUserSettings(Guid userId)
         {
-            return "query with @userId as param";
+            return "query with @userId as param ";
         }
 
         public static string CreateUpdateUserSettings(Guid userId, string alias, bool sendNewsletter)
